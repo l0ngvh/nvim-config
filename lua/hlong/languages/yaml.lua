@@ -1,7 +1,4 @@
-local base = require("hlong.languages.base")
-local lspconfig = require("lspconfig")
-
-lspconfig.yamlls.setup({
+vim.lsp.config("yamlls", {
 	settings = {
 		yaml = {
 			schemastore = { enable = true },
@@ -10,7 +7,9 @@ lspconfig.yamlls.setup({
 	on_attach = function(_, bufnr)
 		if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].filetype == "helm" then
 			vim.diagnostic.disable(bufnr)
+			vim.diagnostic.enable(false, { bufnr })
 		end
 	end,
-	capabilities = base.capabilities,
 })
+
+vim.lsp.enable("yamlls")

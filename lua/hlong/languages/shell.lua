@@ -1,9 +1,4 @@
-local base = require("hlong.languages.base")
-local lspconfig = require("lspconfig")
 local null_ls = require("null-ls")
 
-lspconfig.bashls.setup({
-	capabilities = base.capabilities,
-})
-
+vim.lsp.enable("bashls")
 null_ls.register(null_ls.builtins.formatting.shfmt)

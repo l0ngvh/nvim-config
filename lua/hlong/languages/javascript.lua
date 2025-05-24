@@ -1,10 +1,7 @@
-local lspconfig = require("lspconfig")
 local mason_lsp_install = require("mason-lspconfig.install")
 local mason_registry = require("mason-registry")
 local null_ls = require("null-ls")
 local null_ls_utils = require("null-ls.utils").make_conditional_utils()
-
-local base = require("hlong.languages.base")
 
 --- @param package_name string
 --- @return string
@@ -18,32 +15,20 @@ local function is_installed_in_local_node_modules(package_name)
 	return null_ls_utils.root_has_file(get_binary_path_in_node_modules(package_name))
 end
 
+local eslint = mason_registry.get_package("eslint-lsp")
+if not eslint:is_installed() then
+	mason_lsp_install.install(eslint)
+end
+
+local biome_cmd = nil
 if is_installed_in_local_node_modules("biome") then
-	lspconfig.biome.setup({
-		cmd = { get_binary_path_in_node_modules("biome"), "lsp-proxy" },
-		capabilities = base.capabilities,
-	})
-elseif mason_registry.is_installed("biome") then
-	lspconfig.biome.setup({
-		capabilities = base.capabilities,
-	})
+	biome_cmd = { get_binary_path_in_node_modules("biome"), "lsp-proxy" }
 end
 
-if is_installed_in_local_node_modules("eslint") then
-	local eslint = mason_registry.get_package("eslint-lsp")
-	if not eslint:is_installed() then
-		mason_lsp_install.install(eslint)
-	end
-	lspconfig.eslint.setup({
-		capabilities = base.capabilities,
-	})
-end
-
-lspconfig.cssls.setup({
-	capabilities = base.capabilities,
+vim.lsp.config("biome", {
+	cmd = biome_cmd,
 })
-
-lspconfig.jsonls.setup({
+vim.lsp.config("jsonls", {
 	settings = {
 		json = {
 			schemas = require("schemastore").json.schemas(),
@@ -53,18 +38,22 @@ lspconfig.jsonls.setup({
 	on_attach = function(client, _)
 		client.server_capabilities.documentFormattingProvider = false
 	end,
-	capabilities = base.capabilities,
 })
-
-lspconfig.ts_ls.setup({
+vim.lsp.config("ts_ls", {
 	init_options = {
 		preferences = { includeCompletionsForModuleExports = false },
 	},
 	on_attach = function(client, _)
 		client.server_capabilities.documentFormattingProvider = false
 	end,
-	capabilities = base.capabilities,
 })
+
+vim.lsp.enable("eslint", is_installed_in_local_node_modules("eslint"))
+vim.lsp.enable("biome", is_installed_in_local_node_modules("biome") or mason_registry.is_installed("biome"))
+vim.lsp.enable("cssls")
+vim.lsp.enable("jsonls")
+vim.lsp.enable("ts_ls")
+vim.lsp.enable("cucumber_language_server", mason_registry.is_installed("cucumber-language-server"))
 
 if is_installed_in_local_node_modules("prettier") then
 	null_ls.register({

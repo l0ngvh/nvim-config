@@ -22,6 +22,9 @@ vim.g.rustaceanvim = {
 	},
 }
 
+-- rustaceanvim already launches its own rust-analyzer server
+vim.lsp.enable("rust_analyzer", false)
+
 local codelldb = mason_registry.get_package("codelldb")
 if not codelldb:is_installed() then
 	codelldb:install()

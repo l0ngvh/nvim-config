@@ -1,7 +1,4 @@
-local base = require("hlong.languages.base")
-local lspconfig = require("lspconfig")
-
-lspconfig.pyright.setup({
+vim.lsp.config("pyright", {
 	settings = {
 		python = {
 			analysis = {
@@ -9,12 +6,12 @@ lspconfig.pyright.setup({
 			},
 		},
 	},
-	capabilities = base.capabilities,
 })
-
-lspconfig.ruff.setup({
+vim.lsp.config("ruff", {
 	on_attach = function(client, _)
 		client.server_capabilities.hoverProvider = false
 	end,
-	capabilities = base.capabilities,
 })
+
+vim.lsp.enable("pyright")
+vim.lsp.enable("ruff")
