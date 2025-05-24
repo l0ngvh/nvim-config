@@ -47,12 +47,36 @@ local global_keymaps = {
 		opts = { silent = true },
 	},
 	-- Navigate window
-	{ modes = { "n" }, lhs = "<C-w>b", rhs = "<C-w>s", desc = "Split window horizontally", opts = { noremap = true } },
+	{
+		modes = { "n" },
+		lhs = "<C-w>b",
+		rhs = "<C-w>s",
+		desc = "Split window horizontally",
+		opts = { noremap = true },
+	},
 	-- Move text up and down
-	{ modes = { "n", "v" }, lhs = "<A-j>", rhs = ":m .+1<CR>==", desc = "Move lines down", opts = { silent = true } },
-	{ modes = { "n", "v" }, lhs = "<A-k>", rhs = ":m .-2<CR>==", desc = "Move lines up", opts = { silent = true } },
+	{
+		modes = { "n", "v" },
+		lhs = "<A-j>",
+		rhs = ":m .+1<CR>==",
+		desc = "Move lines down",
+		opts = { silent = true },
+	},
+	{
+		modes = { "n", "v" },
+		lhs = "<A-k>",
+		rhs = ":m .-2<CR>==",
+		desc = "Move lines up",
+		opts = { silent = true },
+	},
 	-- Undo
-	{ modes = { "n" }, lhs = "U", rhs = "<C-r>", desc = "Undo", opts = { noremap = true } },
+	{
+		modes = { "n" },
+		lhs = "U",
+		rhs = "<C-r>",
+		desc = "Undo",
+		opts = { noremap = true },
+	},
 	-- Clear highlights
 	{
 		modes = { "n" },
@@ -82,7 +106,13 @@ local global_keymaps = {
 		opts = { expr = true },
 	},
 	-- System clipboard yank
-	{ modes = { "v" }, lhs = "<leader>y", rhs = '"+y', desc = "Yank to system clipboard", opts = { noremap = true } },
+	{
+		modes = { "v" },
+		lhs = "<leader>y",
+		rhs = '"+y',
+		desc = "Yank to system clipboard",
+		opts = { noremap = true },
+	},
 	{
 		modes = { "v", "n" },
 		lhs = "<leader>p",
@@ -91,10 +121,28 @@ local global_keymaps = {
 		opts = { noremap = true },
 	},
 	-- stay in visual mode when indenting
-	{ modes = { "v" }, lhs = "<", rhs = "<gv", desc = "Indent left", opts = { noremap = true } },
-	{ modes = { "v" }, lhs = ">", rhs = ">gv", desc = "Indent right", opts = { noremap = true } },
+	{
+		modes = { "v" },
+		lhs = "<",
+		rhs = "<gv",
+		desc = "Indent left",
+		opts = { noremap = true },
+	},
+	{
+		modes = { "v" },
+		lhs = ">",
+		rhs = ">gv",
+		desc = "Indent right",
+		opts = { noremap = true },
+	},
 	-- moving between files
-	{ modes = { "n" }, lhs = "ga", rhs = "<C-6>", desc = "Switch to last accessed buffer", opts = { noremap = true } },
+	{
+		modes = { "n" },
+		lhs = "ga",
+		rhs = "<C-6>",
+		desc = "Switch to last accessed buffer",
+		opts = { noremap = true },
+	},
 	{
 		modes = { "n" },
 		lhs = "<leader>ff",
@@ -429,20 +477,6 @@ local function lsp_keymaps(buffer)
 			lhs = "<leader>la",
 			rhs = vim.lsp.buf.code_action,
 			desc = "Show code actions",
-			opts = { buffer = buffer },
-		},
-		{
-			modes = { "n" },
-			lhs = "]d",
-			rhs = vim.diagnostic.goto_next,
-			desc = "Go to next diagnostic",
-			opts = { buffer = buffer },
-		},
-		{
-			modes = { "n" },
-			lhs = "[d",
-			rhs = vim.diagnostic.goto_prev,
-			desc = "Go to previous diagnostic",
 			opts = { buffer = buffer },
 		},
 		{
