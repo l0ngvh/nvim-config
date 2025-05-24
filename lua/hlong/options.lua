@@ -56,5 +56,3 @@ vim.opt.formatoptions:remove({ "c", "r", "o" }) -- don't insert the current comm
 vim.opt.runtimepath:remove("/usr/share/vim/vimfiles") -- separate vim plugins from neovim in case vim still in use
 
 vim.g.python3_host_prog = "/usr/local/venv/bin/python3"
-
-vim.g.copilot_no_maps = true
