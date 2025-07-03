@@ -1,3 +1,6 @@
+-- nvim-jdtls will manage the jdtls server
+vim.lsp.enable("jdtls", false)
+
 local jdtls = require("jdtls")
 
 local root_files = {
