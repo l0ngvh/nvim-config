@@ -28,6 +28,12 @@ return {
 
 		telescope.setup({
 			defaults = {
+				layout_strategy = "center",
+				layout_config = {
+					preview_cutoff = 0,
+				},
+				file_ignore_patterns = { "%.git/" },
+				path_display = { "truncate" },
 				mappings = {
 					i = {
 						["<C-q>"] = trouble.open,
@@ -41,8 +47,6 @@ return {
 						["y"] = M.yank_selection,
 					},
 				},
-				file_ignore_patterns = { "%.git/" },
-				path_display = { "truncate" },
 			},
 			extensions = {
 				fzf = {
