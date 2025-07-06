@@ -409,18 +409,14 @@ local function lsp_keymaps(buffer)
 		{
 			modes = { "n" },
 			lhs = "gD",
-			rhs = function()
-				require("trouble").open({ mode = "lsp_declarations" })
-			end,
+			rhs = "<cmd>Telescope lsp_declarations<CR>",
 			desc = "Go to declaration",
 			opts = { buffer = buffer },
 		},
 		{
 			modes = { "n" },
 			lhs = "gd",
-			rhs = function()
-				require("trouble").open({ mode = "lsp_definitions" })
-			end,
+			rhs = "<cmd>Telescope lsp_definitions<CR>",
 			desc = "Go to definition",
 			opts = { buffer = buffer },
 		},
@@ -434,18 +430,14 @@ local function lsp_keymaps(buffer)
 		{
 			modes = { "n" },
 			lhs = "gi",
-			rhs = function()
-				require("trouble").open({ mode = "lsp_implementations" })
-			end,
+			rhs = "<cmd>Telescope lsp_implementations<CR>",
 			desc = "Go to implementations",
 			opts = { buffer = buffer },
 		},
 		{
 			modes = { "n" },
 			lhs = "gr",
-			rhs = function()
-				require("trouble").open({ mode = "lsp_references", focus = true, auto_refresh = false })
-			end,
+			rhs = "<cmd>Telescope lsp_references<CR>",
 			desc = "Go to references",
 			opts = { buffer = buffer },
 		},
