@@ -1,7 +1,9 @@
 local options = {
 	-- clipboard = "unnamedplus",               -- allows neovim to access the system clipboard
 	backup = false, -- creates a backup file
-	cmdheight = 2, -- more space in the neovim command line for displaying messages
+	-- cmdline is display as float widget using noice,
+	-- just need to display :w result and `n` `N`
+	cmdheight = 1,
 	completeopt = { "menu", "menuone", "noselect" }, -- mostly just for cmp
 	conceallevel = 0,
 	cursorline = true, -- highlight the current line
