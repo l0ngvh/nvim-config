@@ -3,7 +3,6 @@ local function emit_osc7()
 	-- OSC7 format: ESC + "]7;file://" + hostname + path + (ESC + \ or BEL)
 	local hostname = vim.fn.hostname()
 	local osc7 = string.format("\27]7;file://%s%s\27\\", hostname, cwd)
-	vim.notify(vim.inspect(osc7))
 
 	-- Write the sequence to stdout
 	io.stdout:write(osc7)
