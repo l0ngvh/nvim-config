@@ -94,4 +94,17 @@ return {
 	{ "RRethy/vim-illuminate" },
 	{ "HiPhish/rainbow-delimiters.nvim" },
 	{ "lewis6991/gitsigns.nvim", event = { "BufReadPre", "BufNewFile" }, opts = {} },
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+		opts = {
+			checkbox = {
+				checked = {
+					-- Need wezterm capabilities
+					-- https://github.com/neovim/neovim/discussions/24346
+					scope_highlight = "@markup.strikethrough",
+				},
+			},
+		},
+	},
 }
