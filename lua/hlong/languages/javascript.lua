@@ -1,7 +1,7 @@
-local mason_lsp_install = require("mason-lspconfig.install")
 local mason_registry = require("mason-registry")
 local null_ls = require("null-ls")
 local null_ls_utils = require("null-ls.utils").make_conditional_utils()
+local helpers = require("hlong.languages.helpers")
 
 --- @param package_name string
 --- @return string
@@ -15,10 +15,9 @@ local function is_installed_in_local_node_modules(package_name)
 	return null_ls_utils.root_has_file(get_binary_path_in_node_modules(package_name))
 end
 
-local eslint = mason_registry.get_package("eslint-lsp")
-if not eslint:is_installed() then
-	mason_lsp_install.install(eslint)
-end
+helpers.ensure_installed("eslint-lsp")
+helpers.ensure_installed("prettier")
+helpers.ensure_installed("css-lsp")
 
 local biome_cmd = nil
 if is_installed_in_local_node_modules("biome") then
@@ -56,10 +55,13 @@ vim.lsp.enable("ts_ls")
 vim.lsp.enable("cucumber_language_server", mason_registry.is_installed("cucumber-language-server"))
 
 if is_installed_in_local_node_modules("prettier") then
+	vim.notify("Yes, prettier is installed")
 	null_ls.register({
 		null_ls.builtins.formatting.prettier.with({
 			command = get_binary_path_in_node_modules("prettier"),
 			extra_filetypes = { "toml" },
 		}),
 	})
+else
+	null_ls.register(null_ls.builtins.formatting.prettier)
 end
