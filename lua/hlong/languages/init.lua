@@ -62,12 +62,12 @@ vim.lsp.config("*", { capabilities = default_capabilities })
 
 -- Include language specific configs
 require("hlong.languages.docker")
-require("hlong.languages.go")
 require("hlong.languages.hcl")
 require("hlong.languages.javascript")
 require("hlong.languages.lua")
 require("hlong.languages.python")
 require("hlong.languages.ruby")
-require("hlong.languages.rust")
 require("hlong.languages.shell")
 require("hlong.languages.yaml")
+
+vim.lsp.enable("harper_ls")

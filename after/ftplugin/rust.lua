@@ -22,6 +22,8 @@ vim.g.rustaceanvim = {
 	},
 }
 
+helpers.ensure_installed("rust-analyzer")
+
 -- rustaceanvim already launches its own rust-analyzer server
 vim.lsp.enable("rust_analyzer", false)
 
