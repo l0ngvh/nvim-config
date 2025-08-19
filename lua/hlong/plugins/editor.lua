@@ -42,8 +42,18 @@ return {
 		build = ":TSUpdate",
 		event = { "BufReadPost", "BufNewFile" },
 		config = function()
-			vim.wo.foldmethod = "expr"
-			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			local treesitter_group = vim.api.nvim_create_augroup("UserTreesitterConfig", { clear = true })
+			vim.api.nvim_create_autocmd({ "BufNew" }, {
+				callback = function()
+					if vim.o.foldexpr == "v:lua.vim.lsp.foldexpr()" then
+						return
+					end
+					-- https://github.com/neovim/neovim/discussions/34246
+					vim.wo[0][0].foldmethod = "expr"
+					vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
+				end,
+				group = treesitter_group,
+			})
 
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = treesitter_parsers,
