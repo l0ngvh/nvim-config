@@ -146,35 +146,36 @@ local global_keymaps = {
 	{
 		modes = { "n" },
 		lhs = "<leader>ff",
-		rhs = "<cmd>Telescope find_files<CR>",
+		rhs = function()
+			require("fzf-lua").files()
+		end,
 		desc = "Find files",
 		opts = { silent = true },
 	},
 	{
 		modes = { "n" },
 		lhs = "<leader>fs",
-		rhs = "<cmd>Telescope live_grep<CR>",
+		rhs = function()
+			require("fzf-lua").live_grep()
+		end,
 		desc = "Find string in all files",
 		opts = { silent = true },
 	},
 	{
 		modes = { "n" },
 		lhs = "<leader>fb",
-		rhs = "<cmd>Telescope buffers<CR>",
+		rhs = function()
+			require("fzf-lua").buffers()
+		end,
 		desc = "Find buffers",
 		opts = { silent = true },
 	},
 	{
 		modes = { "n" },
-		lhs = "<leader>fo",
-		rhs = "<cmd>Telescope lsp_document_symbols<CR>",
-		desc = "Find symbols/object in current buffer",
-		opts = { silent = true },
-	},
-	{
-		modes = { "n" },
 		lhs = "<leader>hc",
-		rhs = "<cmd>Telescope command_history<CR>",
+		rhs = function()
+			require("fzf-lua").command_history()
+		end,
 		desc = "Find recently used commands",
 		opts = { silent = true },
 	},
@@ -182,7 +183,7 @@ local global_keymaps = {
 		modes = { "n" },
 		lhs = "<leader>fh",
 		rhs = function()
-			require("telescope.builtin").oldfiles()
+			require("fzf-lua").oldfiles()
 		end,
 		desc = "Find recently accessed files",
 		opts = { silent = true },
@@ -409,14 +410,18 @@ local function lsp_keymaps(buffer)
 		{
 			modes = { "n" },
 			lhs = "gD",
-			rhs = "<cmd>Telescope lsp_declarations<CR>",
+			rhs = function()
+				require("fzf-lua").lsp_declarations()
+			end,
 			desc = "Go to declaration",
 			opts = { buffer = buffer },
 		},
 		{
 			modes = { "n" },
 			lhs = "gd",
-			rhs = "<cmd>Telescope lsp_definitions<CR>",
+			rhs = function()
+				require("fzf-lua").lsp_definitions()
+			end,
 			desc = "Go to definition",
 			opts = { buffer = buffer },
 		},
@@ -430,14 +435,18 @@ local function lsp_keymaps(buffer)
 		{
 			modes = { "n" },
 			lhs = "gi",
-			rhs = "<cmd>Telescope lsp_implementations<CR>",
+			rhs = function()
+				require("fzf-lua").lsp_implementations()
+			end,
 			desc = "Go to implementations",
 			opts = { buffer = buffer },
 		},
 		{
 			modes = { "n" },
 			lhs = "gr",
-			rhs = "<cmd>Telescope lsp_references<CR>",
+			rhs = function()
+				require("fzf-lua").lsp_references()
+			end,
 			desc = "Go to references",
 			opts = { buffer = buffer },
 		},
@@ -505,6 +514,15 @@ local function lsp_keymaps(buffer)
 			lhs = "<leader>lo",
 			rhs = "<cmd>Trouble symbols toggle focus=false<cr>",
 			desc = "Open Symbols outline",
+			opts = { silent = true },
+		},
+		{
+			modes = { "n" },
+			lhs = "<leader>fo",
+			rhs = function()
+				require("fzf-lua").lsp_document_symbols()
+			end,
+			desc = "Find symbols/object in current buffer",
 			opts = { silent = true },
 		},
 	}

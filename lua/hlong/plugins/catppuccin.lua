@@ -11,6 +11,7 @@ return {
 				cmp = true,
 				dashboard = true,
 				flash = true,
+				fzf = true,
 				gitsigns = true,
 				illuminate = {
 					enabled = true,
