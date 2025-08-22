@@ -1,5 +1,5 @@
 local null_ls = require("null-ls")
-local helpers = require("hlong.languages.helpers")
+local helpers = require("hlong.helpers")
 
 helpers.ensure_installed("golangci-lint")
 

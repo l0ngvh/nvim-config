@@ -1,3 +1,5 @@
+local conform = require("conform")
+
 vim.lsp.config("pyright", {
 	settings = {
 		python = {
@@ -15,3 +17,5 @@ vim.lsp.config("ruff", {
 
 vim.lsp.enable("pyright")
 vim.lsp.enable("ruff")
+
+conform.formatters_by_ft.python = { "ruff_format" }

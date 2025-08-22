@@ -1,4 +1,7 @@
-local helpers = require("hlong.languages.helpers")
+local conform = require("conform")
+local helpers = require("hlong.helpers")
+
+vim.lsp.enable("rust_analyzer", false)
 
 vim.g.rustaceanvim = {
 	server = {
@@ -25,6 +28,6 @@ vim.g.rustaceanvim = {
 helpers.ensure_installed("rust-analyzer")
 
 -- rustaceanvim already launches its own rust-analyzer server
-vim.lsp.enable("rust_analyzer", false)
 
 helpers.ensure_installed("codelldb")
+conform.formatters_by_ft.rust = { "rustfmt" }

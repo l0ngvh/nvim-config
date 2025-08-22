@@ -14,6 +14,7 @@ return {
 	{ "williamboman/mason.nvim", opts = {} },
 	{ "b0o/schemastore.nvim" },
 	{ "hrsh7th/cmp-nvim-lsp" },
+	{ "stevearc/conform.nvim", opts = {} },
 	{
 		"nvimtools/none-ls.nvim",
 		event = { "BufReadPre", "BufNewFile" },
