@@ -13,7 +13,10 @@ vim.lsp.config("lua_ls", {
 			},
 			workspace = {
 				-- Make the server aware of Neovim runtime files
-				library = {"C:\\Users\\mamlo\\AppData\\Local\\nvim\\lua"},
+        -- Filter by lua so that we get the lua directories instead of the parent directories
+        -- Like ".config/nvim/lua" instead of ".config/nvim"
+        -- This help strip out the lua prefix when using "require" to import modules
+				library = vim.api.nvim_get_runtime_file("lua", true),
 				checkThirdParty = "Disable",
 			},
 		},
