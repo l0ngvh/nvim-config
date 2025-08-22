@@ -1,4 +1,5 @@
 local conform = require("conform")
+local helpers = require("hlong.helpers")
 
 vim.lsp.config("lua_ls", {
 	settings = {
@@ -26,5 +27,7 @@ vim.lsp.config("lua_ls", {
 	end,
 })
 vim.lsp.enable("lua_ls")
+helpers.ensure_installed("lua-language-server")
+helpers.ensure_installed("stylua")
 
 conform.formatters_by_ft.lua = { "stylua" }
