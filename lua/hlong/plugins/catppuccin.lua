@@ -7,6 +7,10 @@ return {
 		require("catppuccin").setup({
 			flavour = "mocha",
 			transparent_background = true,
+			float = {
+				transparent = true,
+				solid = true,
+			},
 			integrations = {
 				cmp = true,
 				dashboard = true,
@@ -50,5 +54,7 @@ return {
 				end,
 			},
 		})
+
+		vim.cmd([[colorscheme catppuccin]])
 	end,
 }
