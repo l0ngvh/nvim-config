@@ -8,7 +8,7 @@ local M = {}
 --- @param package_name string
 function M.ensure_installed(package_name)
 	local package = mason_registry.get_package(package_name)
-	if not package:is_installed() or not package:is_installing() then
+	if not package:is_installed() and not package:is_installing() then
 		package:install()
 	end
 end
