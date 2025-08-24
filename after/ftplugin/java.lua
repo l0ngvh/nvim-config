@@ -2,6 +2,7 @@
 vim.lsp.enable("jdtls", false)
 
 local jdtls = require("jdtls")
+local treesitter = require("nvim-treesitter")
 
 local root_files = {
 	".git",
@@ -61,3 +62,8 @@ local config = {
 }
 
 jdtls.start_or_attach(config)
+
+treesitter.install("java"):wait(300000)
+vim.treesitter.start()
+vim.wo[0][0].foldmethod = "expr"
+vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"

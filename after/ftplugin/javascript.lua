@@ -1,6 +1,7 @@
 local mason_registry = require("mason-registry")
 local conform = require("conform")
 local null_ls_utils = require("null-ls.utils").make_conditional_utils()
+local treesitter = require("nvim-treesitter")
 local helpers = require("hlong.helpers")
 
 --- @param package_name string
@@ -27,17 +28,6 @@ end
 vim.lsp.config("biome", {
 	cmd = biome_cmd,
 })
-vim.lsp.config("jsonls", {
-	settings = {
-		json = {
-			schemas = require("schemastore").json.schemas(),
-			validate = { enable = true },
-		},
-	},
-	on_attach = function(client, _)
-		client.server_capabilities.documentFormattingProvider = false
-	end,
-})
 vim.lsp.config("ts_ls", {
 	init_options = {
 		preferences = { includeCompletionsForModuleExports = false },
@@ -50,7 +40,6 @@ vim.lsp.config("ts_ls", {
 vim.lsp.enable("eslint", is_local("eslint"))
 vim.lsp.enable("biome", is_local("biome") or mason_registry.is_installed("biome"))
 vim.lsp.enable("cssls")
-vim.lsp.enable("jsonls")
 vim.lsp.enable("ts_ls")
 vim.lsp.enable("cucumber_language_server", mason_registry.is_installed("cucumber-language-server"))
 
@@ -61,3 +50,12 @@ if is_local("prettier") then
 end
 
 conform.formatters_by_ft.javascript = { "prettier" }
+treesitter.install({
+	"css",
+	"javascript",
+	"tsx",
+	"typescript",
+}):wait(300000)
+vim.treesitter.start()
+vim.wo[0][0].foldmethod = "expr"
+vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"

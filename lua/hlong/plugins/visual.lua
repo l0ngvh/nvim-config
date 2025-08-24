@@ -5,6 +5,7 @@ return {
 		dependencies = {
 			"MunifTanjim/nui.nvim",
 			"rcarriga/nvim-notify",
+			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function()
 			require("noice").setup({
@@ -35,6 +36,7 @@ return {
 					},
 				},
 			})
+			require("nvim-treesitter").install({ "vim", "regex", "bash" }):wait(300000)
 		end,
 	},
 	{
