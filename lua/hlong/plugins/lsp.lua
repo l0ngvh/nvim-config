@@ -11,7 +11,6 @@ return {
 			require("lspconfig.ui.windows").default_options.border = "rounded"
 		end,
 	},
-	{ "williamboman/mason.nvim", opts = {} },
 	{ "b0o/schemastore.nvim" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "stevearc/conform.nvim", opts = {} },
@@ -27,7 +26,7 @@ return {
 	},
 	{
 		"williamboman/mason.nvim",
-		cmd = "Mason",
+		lazy = false,
 		config = function()
 			require("mason").setup({
 				ui = {
@@ -41,6 +40,7 @@ return {
 				log_level = vim.log.levels.INFO,
 				max_concurrent_installers = 4,
 			})
+			require("mason-registry").refresh()
 		end,
 	},
 	--- Enhance LuaLS
