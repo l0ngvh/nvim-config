@@ -1,8 +1,14 @@
 local mason_registry = require("mason-registry")
 local conform = require("conform")
-local null_ls_utils = require("null-ls.utils").make_conditional_utils()
 local treesitter = require("nvim-treesitter")
 local helpers = require("hlong.helpers")
+
+-- Check if a file exists in the root directory
+local function root_has_file(filename)
+	local path = vim.fn.getcwd() .. "/" .. filename
+	local stat = vim.loop.fs_stat(path)
+	return stat ~= nil
+end
 
 --- @param package_name string
 --- @return string
@@ -13,21 +19,20 @@ end
 --- @param package_name string
 --- @return boolean
 local function is_local(package_name)
-	return null_ls_utils.root_has_file(get_local_bin(package_name))
+	return root_has_file(get_local_bin(package_name))
 end
 
 helpers.ensure_installed("eslint-lsp")
 -- helpers.ensure_installed("prettier")
 helpers.ensure_installed("css-lsp")
 
-local biome_cmd = nil
 if is_local("biome") then
-	biome_cmd = { get_local_bin("biome"), "lsp-proxy" }
+	local biome_cmd = { get_local_bin("biome"), "lsp-proxy" }
+	vim.lsp.config("biome", {
+		cmd = biome_cmd,
+	})
 end
 
-vim.lsp.config("biome", {
-	cmd = biome_cmd,
-})
 vim.lsp.config("ts_ls", {
 	init_options = {
 		preferences = { includeCompletionsForModuleExports = false },
@@ -50,12 +55,14 @@ if is_local("prettier") then
 end
 
 conform.formatters_by_ft.javascript = { "prettier" }
-treesitter.install({
-	"css",
-	"javascript",
-	"tsx",
-	"typescript",
-}):wait(300000)
+treesitter
+	.install({
+		"css",
+		"javascript",
+		"tsx",
+		"typescript",
+	})
+	:wait(300000)
 vim.treesitter.start()
 vim.wo[0][0].foldmethod = "expr"
 vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"

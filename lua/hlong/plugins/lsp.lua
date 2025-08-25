@@ -14,16 +14,7 @@ return {
 	{ "b0o/schemastore.nvim" },
 	{ "hrsh7th/cmp-nvim-lsp" },
 	{ "stevearc/conform.nvim", opts = {} },
-	{
-		"nvimtools/none-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		main = "null-ls",
-		opts = {
-			border = "rounded",
-			debounce = 1000,
-			debug = false,
-		},
-	},
+	{ "mfussenegger/nvim-lint" },
 	{
 		"williamboman/mason.nvim",
 		lazy = false,

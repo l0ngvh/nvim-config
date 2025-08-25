@@ -2,6 +2,7 @@
 
 local cmp_nvim_lsp = require("cmp_nvim_lsp")
 local conform = require("conform")
+local lint = require("lint")
 local keymaps = require("hlong.keymaps")
 
 local language_group = vim.api.nvim_create_augroup("UserLanguageConfig", { clear = true })
@@ -63,6 +64,13 @@ vim.api.nvim_create_user_command("FormatEnable", function()
 	vim.g.disable_autoformat = false
 end, {
 	desc = "Re-enable autoformat-on-save",
+})
+
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
+	callback = function()
+		lint.try_lint()
+	end,
+	group = language_group,
 })
 
 local default_capabilities = vim.lsp.protocol.make_client_capabilities()
