@@ -409,6 +409,34 @@ local global_keymaps = {
 		desc = "Open git blame",
 		opts = { silent = true },
 	},
+	{
+		-- Might need to be added only after gitsign attached
+		modes = { "n" },
+		lhs = "]c",
+		rhs = function()
+			if vim.wo.diff then
+				vim.cmd.normal({ "]c", bang = true })
+			else
+				require("gitsigns").nav_hunk("next")
+			end
+		end,
+		desc = "Move to next changed section",
+		opts = { silent = true },
+	},
+	{
+		-- Might need to be added only after gitsign attached
+		modes = { "n" },
+		lhs = "[c",
+		rhs = function()
+			if vim.wo.diff then
+				vim.cmd.normal({ "[c", bang = true })
+			else
+				require("gitsigns").nav_hunk("prev")
+			end
+		end,
+		desc = "Move to next changed section",
+		opts = { silent = true },
+	},
 }
 
 --- @param buffer number
