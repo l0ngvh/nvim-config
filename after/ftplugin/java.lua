@@ -1,8 +1,10 @@
 -- nvim-jdtls will manage the jdtls server
-vim.lsp.enable("jdtls", false)
-
 local jdtls = require("jdtls")
 local treesitter = require("nvim-treesitter")
+local helpers = require("hlong.helpers")
+
+helpers.ensure_installed("jdtls")
+vim.lsp.enable("jdtls", false)
 
 local root_files = {
 	".git",
