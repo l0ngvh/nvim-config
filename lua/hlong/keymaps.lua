@@ -217,6 +217,14 @@ local global_keymaps = {
 		end,
 		desc = "Leap/Flash",
 	},
+	{
+		modes = { "n" },
+		lhs = "S",
+		rhs = function()
+			require("flash").treesitter()
+		end,
+		desc = "Incremental node selection",
+	},
 	-- toggle file explorer
 	{
 		modes = { "n" },
