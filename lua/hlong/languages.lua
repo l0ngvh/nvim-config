@@ -88,3 +88,4 @@ vim.filetype.add({
 })
 
 vim.treesitter.language.register("terraform", "terraform-vars")
+vim.lsp.enable("jdtls", false)
