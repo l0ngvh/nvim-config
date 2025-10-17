@@ -24,3 +24,20 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 	callback = emit_osc7,
 	desc = "Emit OSC7 sequence on Vim start",
 })
+
+local function set_wezterm_file_var()
+	local current_file = vim.fn.expand("%:p")
+	if current_file == "" then
+		return
+	end
+
+	local blob = { type = "nvim", current_file = current_file, current_line = vim.fn.line(".") }
+	local encoded = vim.base64.encode(vim.json.encode(blob))
+	local user_var = string.format("\27]1337;SetUserVar=program_context=%s\27\\", encoded)
+	io.stdout:write(user_var)
+end
+
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorMoved" }, {
+	pattern = "*",
+	callback = set_wezterm_file_var,
+})

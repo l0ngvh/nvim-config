@@ -7,7 +7,7 @@ require("hlong.lazy")
 require("hlong.keymaps")
 
 require("hlong.clipboard")
-require("hlong.directory")
+require("hlong.wezterm")
 
 require("hlong.diagnostic")
 require("hlong.languages")
