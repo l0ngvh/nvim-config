@@ -390,7 +390,7 @@ local global_keymaps = {
 	{
 		modes = { "n" },
 		lhs = "<leader>q",
-		rhs = "<cmd>Bdelete<CR>",
+		rhs = "<cmd>Bdelete!<CR>",
 		desc = "Close buffer",
 		opts = { silent = true },
 	},
