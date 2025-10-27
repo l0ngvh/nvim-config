@@ -12,6 +12,6 @@ conform.formatters_by_ft.zsh = { "shfmt" }
 
 -- There is a zsh grammar for zsh, but treesitter hasn't supported it yet
 treesitter.install("bash"):wait(300000)
-vim.treesitter.start()
+vim.treesitter.start(0, "bash")
 vim.wo[0][0].foldmethod = "expr"
 vim.wo[0][0].foldexpr = "v:lua.vim.treesitter.foldexpr()"
