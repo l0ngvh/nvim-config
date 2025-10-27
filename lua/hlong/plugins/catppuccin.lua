@@ -13,7 +13,6 @@ return {
 			},
 			integrations = {
 				cmp = true,
-				dashboard = true,
 				flash = true,
 				fzf = true,
 				gitsigns = true,
