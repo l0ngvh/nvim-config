@@ -89,3 +89,28 @@ vim.filetype.add({
 
 vim.treesitter.language.register("terraform", "terraform-vars")
 vim.lsp.enable("jdtls", false)
+
+-- rustaceanvim already launches its own rust-analyzer server
+vim.lsp.enable("rust_analyzer", false)
+vim.g.rustaceanvim = {
+	server = {
+		capabilities = default_capabilities,
+		default_settings = {
+			["rust-analyzer"] = {
+				inlayHints = {
+					typeHints = {
+						enable = false,
+					},
+				},
+			},
+		},
+	},
+	tools = {
+		hover_actions = {
+			replace_builtin_hover = false,
+		},
+		float_win_config = {
+			border = "rounded",
+		},
+	},
+}
