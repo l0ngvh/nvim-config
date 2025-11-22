@@ -505,7 +505,9 @@ local function lsp_keymaps(buffer)
 		{
 			modes = { "n", "v" },
 			lhs = "<leader>la",
-			rhs = vim.lsp.buf.code_action,
+			rhs = function()
+				require("fzf-lua").lsp_code_actions()
+			end,
 			desc = "Show code actions",
 			opts = { buffer = buffer },
 		},
