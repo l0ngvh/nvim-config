@@ -1,3 +1,5 @@
+local lint = require("lint")
+local helpers = require("hlong.helpers")
 require("nvim-treesitter").install({ "json", "jsonc" }):wait(300000)
 vim.treesitter.start()
 vim.wo[0][0].foldmethod = "expr"
@@ -15,3 +17,6 @@ vim.lsp.config("jsonls", {
 	end,
 })
 vim.lsp.enable("jsonls")
+
+helpers.ensure_installed("jsonlint")
+lint.linters_by_ft.json = { "jsonlint" }
