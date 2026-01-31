@@ -79,8 +79,6 @@ default_capabilities = cmp_nvim_lsp.default_capabilities(default_capabilities)
 
 vim.lsp.config("*", { capabilities = default_capabilities })
 
-vim.lsp.enable("harper_ls")
-
 vim.filetype.add({
 	filename = {
 		["devcontainer.json"] = "jsonc",
